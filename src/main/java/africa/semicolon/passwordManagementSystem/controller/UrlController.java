@@ -31,7 +31,7 @@ public class UrlController {
         }
     }
     @GetMapping("/search/{address}")
-    public ResponseEntity<?> findUrlDetails(@PathVariable String address){
+    public ResponseEntity<?> findUrlDetails(@PathVariable("address") String address){
         try{
             var response = urlService.findUrl(address);
             ApiResponse theResponse = new ApiResponse(response, true);

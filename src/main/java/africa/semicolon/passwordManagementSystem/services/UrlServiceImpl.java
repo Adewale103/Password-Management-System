@@ -35,10 +35,10 @@ public class UrlServiceImpl implements UrlService{
         Url url = new Url();
         if(foundUser.getPassword().equals(request.getUserPassword())){
             modelMapper.map(request,url);
-            Url savedUrl = urlRepository.save(url);
-            if(foundUser.getUrls().contains(savedUrl)){
+            if(foundUser.getUrls().contains(url)){
                 throw new UrlException("Url details already added!");
             }
+            Url savedUrl = urlRepository.save(url);
             foundUser.getUrls().add(savedUrl);
             userRepository.save(foundUser);
         }
@@ -82,8 +82,6 @@ public class UrlServiceImpl implements UrlService{
                     userRepository.save(foundUser);
                 }
             }
-
-            modelMapper.map(urlRequest,response);
         });
          return response;
         }
